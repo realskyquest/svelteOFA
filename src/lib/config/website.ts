@@ -17,5 +17,12 @@ interface websiteConfigType {
 	url: string;
 	contactEmail: string | undefined;
 	githubPage: string | undefined;
-	socialMedia: Array<string> | undefined;
+	socialMedia: Array<socialMediaType> | undefined;
+}
+
+// { type: "twitter" link:"twitter.com/user" icon: "icon-link" }
+interface socialMediaType {
+	type: string;
+	link: string;
+	icon: string | undefined;
 }
