@@ -4,6 +4,7 @@
 
 <svelte:head>
 	<title>Home</title>
+	<meta name="description" content="My homepage" />
 </svelte:head>
 
 <section class="mt-10 mb-20">

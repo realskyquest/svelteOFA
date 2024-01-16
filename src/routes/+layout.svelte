@@ -29,8 +29,14 @@
 	});
 </script>
 
+<!-- PWA links -->
 <svelte:head>
-	<link rel="manifest" href="/app.webmanifest" />
+	<link rel="manifest" href="/app.webmanifest" type="application/manifest+json" />
+	<link rel="icon" href="/favicon.ico" sizes="48x48" />
+	<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+	<link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+	<link rel="mask-icon" href="/pwa-512x512.png" color="#ff3f20" />
+	<meta name="theme-color" content="#ff3f20" />
 </svelte:head>
 
 <main>
