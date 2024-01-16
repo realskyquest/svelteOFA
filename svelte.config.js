@@ -28,7 +28,10 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 
 	kit: {
-		adapter: adapter({ fallback: '404.html' })
+		adapter: adapter({ fallback: '404.html' }),
+		serviceWorker: {
+			register: process.argv.includes('dev') ? false : true
+		}
 	}
 };
 

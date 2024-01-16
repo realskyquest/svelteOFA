@@ -69,12 +69,14 @@
 				class="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 text-primary rounded-box h-[28.6rem] max-h-[calc(100vh-10rem)] w-52 overflow-y-scroll"
 			>
 				{#each themes as theme}
-					<li>
+					<li class="mt-1 mb-1">
 						<input
+							data-theme={theme}
 							type="radio"
 							name="theme-dropdown"
-							class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-							aria-label={theme.charAt(0).toUpperCase() + theme.slice(1)}
+							class="theme-controller bg-primary-content text-primary btn btn-sm btn-block btn-ghost justify-start"
+							aria-label="{myTheme === theme ? '✓' : ''} {theme.charAt(0).toUpperCase() +
+								theme.slice(1)}"
 							value={theme}
 							bind:group={myTheme}
 							on:click={() => handleTheme(theme)}
