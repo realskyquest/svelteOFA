@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { dev } from '$app/environment';
 
-	import { websitePWAConfig } from '$lib/config/website';
+	import { websiteConfig, websitePWAConfig } from '$lib/config/website';
 	import Header from '$lib/config/Header.svelte';
 	import Footer from '$lib/config/Footer.svelte';
 
@@ -33,6 +33,9 @@
 
 <!-- PWA links -->
 <svelte:head>
+	<meta name="author" content={websiteConfig.author} />
+	<meta name="generator" content="Sveltekit" />
+
 	<link rel="manifest" href="/manifest.webmanifest" type="application/manifest+json" />
 	<link rel="icon" href="/favicon.ico" sizes="48x48" />
 	<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
