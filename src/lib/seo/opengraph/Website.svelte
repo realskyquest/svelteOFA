@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { websiteConfig } from '$lib/config/website';
+	import { websiteConfig } from '$config/website';
 	import { page } from '$app/stores';
 
 	export let lang: string = 'en_US';
@@ -20,7 +20,7 @@
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 
-	<meta property="og:image" content={image} />
+	<meta property="og:image" content="{websiteConfig.url}{image}" />
 	<meta property="og:image:width" content={imageWidth} />
 	<meta property="og:image:height" content={imageHeight} />
 	<meta property="og:image:alt" content={imageAlt} />
