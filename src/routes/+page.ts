@@ -1,9 +1,6 @@
 import { websiteConfig } from '$config/website';
 import type { PageLoad } from './$types';
 
-// generator: https://technicalseo.com/tools/schema-markup-generator/
-// good guide for seo: https://www.danielkcheung.com/learn/
-
 const pageSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'Organization',
