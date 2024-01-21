@@ -31,6 +31,10 @@ const config = {
 		adapter: adapter({ fallback: '404.html' }),
 		serviceWorker: {
 			register: process.argv.includes('dev') ? false : true
+		},
+		alias: {
+			$config: 'src/lib/config',
+			$seo: 'src/lib/seo'
 		}
 	}
 };
