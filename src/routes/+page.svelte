@@ -7,6 +7,9 @@
 	import SummaryLargeImage from '$seo/twitter/SummaryLargeImage.svelte';
 	import SchemaOrg from '$seo/SchemaOrg.svelte';
 
+	import LocalImage from '$img/Local.svelte';
+	import RemoteImage from '$img/Remote.svelte';
+
 	export let data: PageData;
 </script>
 
@@ -41,10 +44,24 @@
 	</article>
 </section>
 
-<!-- <IImage
-	alt="coffee cup"
-	src="https://realskyquest.imgix.net/images/coffee.jpg"
-	width={600}
-	height={450}
+<LocalImage alt="stuff" src="coffee.jpg" width={600} height={450} layout="constrained" />
+<LocalImage alt="logo" src="pwa-512x512.png" width={512} height={512} layout="constrained" />
+
+<RemoteImage
+	alt="wine glass"
+	src="https://res.cloudinary.com/demo/image/upload/docs/wines.jpg"
+	width={500}
+	height={500}
 	layout="constrained"
-/> -->
+/>
+
+<figure>
+	<RemoteImage
+		alt="wine glass"
+		src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1024px-Image_created_with_a_mobile_phone.png"
+		width={500}
+		height={500}
+		layout="constrained"
+	/>
+	<figcaption class="text-[0.875em] text-primary mt-2 mb-4">Taking photo</figcaption>
+</figure>

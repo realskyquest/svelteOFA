@@ -28,13 +28,14 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 
 	kit: {
-		adapter: adapter({ fallback: '404.html' }),
+		adapter: adapter({ fallback: '404.html', precompress: true }),
 		serviceWorker: {
 			register: process.argv.includes('dev') ? false : true
 		},
 		alias: {
 			$config: 'src/lib/config',
-			$seo: 'src/lib/seo'
+			$seo: 'src/lib/seo',
+			$img: 'src/lib/image'
 		}
 	}
 };
