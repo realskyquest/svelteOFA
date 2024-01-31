@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { websiteConfig } from '$config/website';
-	import { page } from '$app/stores';
 
+	export let url: string;
 	export let lang: string = 'en_US';
 	export let title: string;
 	export let description: string;
@@ -18,12 +18,12 @@
 <svelte:head>
 	<meta property="og:site_name" content={websiteConfig.title} />
 	<meta property="og:locale" content={lang} />
-	<meta property="og:url" content={$page.url.href} />
+	<meta property="og:url" content={websiteConfig.url + url} />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 
-	<meta property="og:image" content="{websiteConfig.url}{image}" />
+	<meta property="og:image" content={image} />
 	<meta property="og:image:width" content={imageWidth} />
 	<meta property="og:image:height" content={imageHeight} />
 	<meta property="og:image:alt" content={imageAlt} />

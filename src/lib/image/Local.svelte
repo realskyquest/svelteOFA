@@ -1,87 +1,64 @@
 <script lang="ts">
-	import './fade.css';
+	import { imagesJSON } from '$lib/images';
 
-	import { onMount } from 'svelte';
-	import { Image } from '@unpic/svelte';
-	import { getImageBlur } from './image';
+	export let alt: string;
+	export let loading: 'eager' | 'lazy' = 'eager';
 
-	export let alt: String;
-	export let src: String;
-	export let width: Number;
-	export let height: Number;
-	export let layout: 'constrained' | 'fullWidth' = 'constrained';
+	export let src: string;
+	export let width: number;
+	export let height: number;
+
+	export let layout: 'constrained' | 'fullWidth' | 'fixed' = 'constrained';
 	export let css: string = '';
 
-	let mainElement: HTMLDivElement;
-	let backgroundElement: HTMLDivElement;
-	let blurWidth = `${width}px`;
-	let blurHeight = `${height}px`;
-
-	onMount(() => {
-		const pictureElement: HTMLPictureElement | null = mainElement.querySelector('picture');
-
-		if (pictureElement) {
-			const imageElement: HTMLImageElement | null = pictureElement.querySelector('img');
-
-			if (imageElement) {
-				const resizeObserver = new ResizeObserver((entries) => {
-					for (let entry of entries) {
-						if (entry.target === imageElement) {
-							blurWidth = `${entry.contentRect.width}px`;
-							blurHeight = `${entry.contentRect.height}px`;
-						}
-					}
-				});
-
-				function loaded() {
-					if (pictureElement && imageElement) {
-						backgroundElement.classList.add('fade-out');
-						pictureElement.classList.add('fade-in');
-						setTimeout(() => {
-							resizeObserver.unobserve(imageElement);
-						}, 1000);
-					}
-				}
-
-				resizeObserver.observe(imageElement);
-				backgroundElement.style.opacity = '1';
-				if (imageElement.complete) {
-					loaded();
-				} else {
-					imageElement.addEventListener('load', loaded);
-				}
-			}
-		}
-	});
+	const image = imagesJSON['/src/images/' + src];
 </script>
 
-<div bind:this={mainElement} class="wrap">
-	<picture style="opacity: 0;">
-		<Image {alt} src={'/images/' + src} {width} {height} {layout} class={css} />
+{#if layout === 'constrained'}
+	<picture>
+		<source sizes="(min-width: {width}px) {width}px, 100vw" srcset={image.avif} type="image/avif" />
+		<source sizes="(min-width: {width}px) {width}px, 100vw" srcset={image.webp} type="image/webp" />
+		<img
+			{alt}
+			{loading}
+			decoding="async"
+			sizes="(min-width: {width}px) {width}px, 100vw"
+			src={image.src}
+			srcset={image.jpeg}
+			style="object-fit: cover; max-width: {width}px; max-height: {height}px; width: 100%;"
+			class={css}
+		/>
 	</picture>
-	<div
-		bind:this={backgroundElement}
-		class="blurImg"
-		style="background-image: url({getImageBlur('/src/images/' + src)});
-		height: {blurHeight};
-		width: {layout === 'fullWidth' ? '100%' : blurWidth};
-		background-position: center;
-		opacity: 0;
-		"
-	/>
-</div>
-
-<style>
-	.wrap {
-		position: relative;
-		overflow: hidden;
-	}
-	.blurImg {
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		object-fit: cover;
-		background-size: cover;
-		background-repeat: no-repeat;
-	}
-</style>
+{:else if layout === 'fullWidth'}
+	<picture>
+		<source sizes="100vw" srcset={image.avif} type="image/avif" />
+		<source sizes="100vw" srcset={image.webp} type="image/webp" />
+		<img
+			{alt}
+			{loading}
+			decoding="async"
+			sizes="100vw"
+			src={image.src}
+			srcset={image.jpeg}
+			style="object-fit: cover; width: 100%; height: {height}px;"
+			class={css}
+		/>
+	</picture>
+{:else if layout === 'fixed'}
+	<picture>
+		<source sizes="{width}px" srcset={image.avif} type="image/avif" />
+		<source sizes="{width}px" srcset={image.webp} type="image/webp" />
+		<img
+			{alt}
+			{loading}
+			decoding="async"
+			sizes="{width}px"
+			src={image.src}
+			srcset={image.jpeg}
+			width="{width}px"
+			height="{height}px"
+			style="object-fit: cover; width: {width}px; height: {height}px;"
+			class={css}
+		/>
+	</picture>
+{/if}

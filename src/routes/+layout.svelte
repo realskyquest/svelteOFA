@@ -2,7 +2,7 @@
 	import '../app.css';
 
 	import { onMount } from 'svelte';
-	import { dev } from '$app/environment';
+	import { browser, dev } from '$app/environment';
 
 	import { websiteConfig, websitePWAConfig } from '$config/website';
 	import Header from '$config/Header.svelte';
@@ -25,7 +25,7 @@
 	}
 
 	onMount(() => {
-		if (!dev) {
+		if (!dev && browser) {
 			detectSWUpdate();
 		}
 	});
@@ -36,19 +36,11 @@
 	<meta name="author" content={websiteConfig.author} />
 	<meta name="generator" content="Sveltekit" />
 
-	<link
-		rel="manifest"
-		href="{websiteConfig.url}/manifest.webmanifest"
-		type="application/manifest+json"
-	/>
-	<link rel="icon" href="{websiteConfig.url}/favicon.ico" sizes="48x48" />
-	<link rel="icon" href="{websiteConfig.url}/favicon.svg" sizes="any" type="image/svg+xml" />
-	<link rel="apple-touch-icon" href="{websiteConfig.url}/apple-touch-icon-180x180.png" />
-	<link
-		rel="mask-icon"
-		href="{websiteConfig.url}/pwa-512x512.png"
-		color={websitePWAConfig.background_color}
-	/>
+	<link rel="manifest" href="/manifest.webmanifest" type="application/manifest+json" />
+	<link rel="icon" href="/favicon.ico" sizes="48x48" />
+	<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+	<link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+	<link rel="mask-icon" href="/pwa-512x512.png" color={websitePWAConfig.background_color} />
 	<meta name="theme-color" content={websitePWAConfig.background_color} />
 </svelte:head>
 

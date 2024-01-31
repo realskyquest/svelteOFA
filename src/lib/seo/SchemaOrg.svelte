@@ -3,14 +3,12 @@
 	// good guide for seo: https://www.danielkcheung.com/learn/
 
 	export let schemaOrgObject: object;
-	const jsonLdString: string = JSON.stringify(schemaOrgObject);
-	const jsonLdScript: string = `
- <script type="application/ld+json">
- ${jsonLdString}
- ${'<'}/script>
- `;
+
+	export function serializeSchema(thing) {
+		return `<script type="application/ld+json">${JSON.stringify(thing)}${'<'}/script>`;
+	}
 </script>
 
 <svelte:head>
-	{@html jsonLdScript}
+	{@html serializeSchema(schemaOrgObject)}
 </svelte:head>
