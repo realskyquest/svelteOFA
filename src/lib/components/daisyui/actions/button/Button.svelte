@@ -1,91 +1,75 @@
 <script lang="ts">
-	import './button.css';
+	import type { daisy_ui_component_prefix } from '../../daisyui-component';
+	import { RippleEffect } from '../..';
 
-	export let brand:
-		| ''
+	type Appearance =
 		| 'btn-neutral'
 		| 'btn-primary'
 		| 'btn-secondary'
 		| 'btn-accent'
 		| 'btn-ghost'
-		| 'btn-link' = '';
-	export let active: '' | 'btn-active' = '';
-	export let state: '' | 'btn-info' | 'btn-success' | 'btn-warning' | 'btn-error' = '';
-	export let outline: '' | 'btn-outline' = '';
-	export let size: '' | 'btn-lg' | 'btn-sm' | 'btn-xs' = '';
-	export let wide: '' | 'btn-wide' | 'btn-block' = '';
-	export let glass: '' | 'glass' = '';
-	export let shape: '' | 'btn-square' | 'btn-circle' = '';
+		| 'btn-link'
+		| 'btn-info'
+		| 'btn-success'
+		| 'btn-warning'
+		| 'btn-error';
+
+	type Size = 'btn-lg' | 'btn-sm' | 'btn-xs';
+	type Width = 'btn-wide' | 'btn-block';
+	type Shape = 'btn-square' | 'btn-circle';
+
+	export let prefix: `${daisy_ui_component_prefix}btn`;
+
+	export let appearance: null | `${daisy_ui_component_prefix}${Appearance}` = null;
+	export let outline: null | `${daisy_ui_component_prefix}btn-outline` = null;
+	export let glass: boolean = false;
+
+	export let size: null | `${daisy_ui_component_prefix}${Size}` = null;
+	export let width: null | `${daisy_ui_component_prefix}${Width}` = null;
+	export let shape: null | `${daisy_ui_component_prefix}${Shape}` = null;
 
 	export let href: string = '';
-	export let animation: '' | 'no-animation' = '';
-	export let ripple: boolean = false;
-
-	export let disabled: boolean = false;
+	export let active: null | `${daisy_ui_component_prefix}btn-active` = null;
+	
+	export let centerRipple: boolean = false;
+	export let disableAnimation: boolean = false;
+	export let disableRipple: boolean = false;
 
 	let button: HTMLButtonElement;
-    let hrefButton: HTMLAnchorElement
 
-	function createRipple(event: any) {
-		const button = event.currentTarget;
-		const circle = document.createElement('span');
-		const diameter = Math.max(button.clientWidth, button.clientHeight);
-		const radius = diameter / 2;
-
-		circle.style.width = circle.style.height = `${diameter}px`;
-		circle.style.left = `${event.clientX - (button.offsetLeft + radius)}px`;
-		circle.style.top = `${event.clientY - (button.offsetTop + radius)}px`;
-		circle.classList.add('ripple');
-
-		const ripple = button.getElementsByClassName('ripple')[0];
-
-		if (ripple) {
-			ripple.remove();
-		}
-
-		button.appendChild(circle);
-	}
-
-	$: if (button && ripple === true) {
-		button.addEventListener('click', createRipple);
+	$: if (button && disableRipple === false) {
+		button.addEventListener('click', (event: MouseEvent) =>
+			RippleEffect(event as MouseEvent, centerRipple)
+		);
 	}
 </script>
 
-{#if href !== ''}
-	<a
-		bind:this={hrefButton}
-        role="button"
-        href={href}
-		style={ripple === true ? 'position: relative; overflow: hidden;' : ''}
-		class="btn {brand} {active} {state} {outline} {size} {wide} {glass} {shape} {animation}"
-		on:click
-		on:change
-		on:keydown
-		on:keyup
-		on:touchstart|passive
-		on:touchend
-		on:touchcancel
-		on:mouseenter
-		on:mouseleave
-	>
-		<slot />
-    </a>
-{:else}
+{#if href === ''}
 	<button
 		bind:this={button}
-		style={ripple === true ? 'position: relative; overflow: hidden;' : ''}
-		class="btn {brand} {active} {state} {outline} {size} {wide} {glass} {shape} {animation}"
-		{disabled}
-		on:click
-		on:change
-		on:keydown
-		on:keyup
-		on:touchstart|passive
-		on:touchend
-		on:touchcancel
-		on:mouseenter
-		on:mouseleave
+		on:*
+		{...$$restProps}
+		class="{prefix} {appearance ? appearance : ''} {outline ? outline : ''} {glass
+			? 'glass'
+			: ''} {size ? size : ''} {width ? width : ''} {shape ? shape : ''} {active
+			? active
+			: ''} {!disableRipple ? 'ripple' : ''} {disableAnimation
+			? 'no-animation'
+			: ''} {$$restProps.class ? $$restProps.class : ''}"
 	>
 		<slot />
 	</button>
+{:else}
+	<a
+		{href}
+		on:*
+		{...$$restProps}
+		class="{prefix} {appearance ? appearance : ''} {outline ? outline : ''} {glass
+			? 'glass'
+			: ''} {size ? size : ''} {width ? width : ''} {shape ? shape : ''} {active
+			? active
+			: ''} {disableAnimation ? 'no-animation' : ''} {$$restProps.class ? $$restProps.class : ''}"
+	>
+		<slot />
+	</a>
 {/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
     // Typescript
-    import type { PageData } from '../../$types';
+    import type { PageData } from './$types';
 
     // Modules
     import config from "$lib/data/config";
@@ -12,4 +12,5 @@
     <title>{data.page.title} | {config.title}</title>
 </svelte:head>
 
-<p>DOCS</p>
+<a href="/docs/button">Buttons</a>
+<a href="/docs/loading">Loading stuff</a>
