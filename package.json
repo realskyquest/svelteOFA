@@ -1,7 +1,17 @@
 {
-  "name": "",
-  "version": "0.0.1",
-  "private": true,
+  "name": "svelteofa",
+  "description": "sveltekit webapp that can be used as starting point for any webapp",
+  "version": "0.0.3",
+  "private": false,
+  "license":"GPL-3.0-only",
+  "homepage": "https://svelteofa-realskyquest.pages.dev",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/realskyquest/svelteofa.git"
+	},
+	"bugs": {
+		"url": "https://github.com/realskyquest/svelteofa/issues"
+	},
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
