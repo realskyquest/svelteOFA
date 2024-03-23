@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { daisy_ui_component_prefix } from '../../daisyui-component';
-	import { RippleEffect } from '../..';
+	import { RippleEffect } from '$lib/components/daisyui/index'
 
 	type Appearance =
 		| 'btn-neutral'

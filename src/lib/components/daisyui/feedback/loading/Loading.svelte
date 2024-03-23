@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { daisy_ui_component_prefix } from '../../daisyui-component';
-
 	type Animation = 'spinner' | 'dots' | 'ring' | 'ball' | 'infinity';
 	type Size = 'lg' | 'md' | 'sm' | 'xs';
 

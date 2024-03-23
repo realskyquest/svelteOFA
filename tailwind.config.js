@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {},
   },
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
 		themes: [
 			'coffee',
@@ -11,6 +12,5 @@ export default {
     prefix: 'dui-',
 		logs: false
 	},
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
 }
 

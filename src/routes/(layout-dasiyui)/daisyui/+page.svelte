@@ -12,5 +12,5 @@
     <title>{data.page.title} | {config.title}</title>
 </svelte:head>
 
-<a href="/docs/button">Buttons</a>
-<a href="/docs/loading">Loading stuff</a>
+<a href="/daisyui/button">Buttons</a>
+<a href="/daisyui/loading">Loading stuff</a>
