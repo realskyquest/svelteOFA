@@ -1,57 +1,25 @@
 <script lang="ts">
-	import '../app.css';
+	import '../app.postcss';
 
-	import { onMount } from 'svelte';
-	import { browser, dev } from '$app/environment';
+	// Highlight JS
+	import hljs from 'highlight.js/lib/core';
+	import 'highlight.js/styles/github-dark.css';
+	import { storeHighlightJs } from '@skeletonlabs/skeleton';
+	import xml from 'highlight.js/lib/languages/xml'; // for HTML
+	import css from 'highlight.js/lib/languages/css';
+	import javascript from 'highlight.js/lib/languages/javascript';
+	import typescript from 'highlight.js/lib/languages/typescript';
 
-	import { websiteConfig, websitePWAConfig } from '$config/website';
-	import Header from '$config/Header.svelte';
-	import Footer from '$config/Footer.svelte';
+	hljs.registerLanguage('xml', xml); // for HTML
+	hljs.registerLanguage('css', css);
+	hljs.registerLanguage('javascript', javascript);
+	hljs.registerLanguage('typescript', typescript);
+	storeHighlightJs.set(hljs);
 
-	async function detectSWUpdate() {
-		const registration = await navigator.serviceWorker.ready;
-
-		registration.addEventListener('updatefound', () => {
-			const newSW = registration.installing;
-			newSW?.addEventListener('statechange', () => {
-				if (newSW.state == 'installed') {
-					if (confirm('New update available! Reload to update?')) {
-						newSW.postMessage({ type: 'SKIP_WAITING' });
-						window.location.reload();
-					}
-				}
-			});
-		});
-	}
-
-	onMount(() => {
-		if (!dev && browser) {
-			detectSWUpdate();
-		}
-	});
+	// Floating UI for Popups
+	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
+	import { storePopup } from '@skeletonlabs/skeleton';
+	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
-<!-- PWA links -->
-<svelte:head>
-	<meta name="author" content={websiteConfig.author} />
-	<meta name="generator" content="Sveltekit" />
-
-	<link rel="manifest" href="/manifest.webmanifest" type="application/manifest+json" />
-	<link rel="icon" href="/favicon.ico" sizes="48x48" />
-	<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
-	<link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
-	<link rel="mask-icon" href="/pwa-512x512.png" color={websitePWAConfig.background_color} />
-	<meta name="theme-color" content={websitePWAConfig.background_color} />
-</svelte:head>
-
-<main>
-	<header>
-		<Header />
-	</header>
-
-	<slot />
-
-	<footer class="footer footer-center p-4 bg-base-300 text-base-content">
-		<Footer />
-	</footer>
-</main>
+<slot />
