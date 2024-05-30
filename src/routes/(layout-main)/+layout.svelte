@@ -1,6 +1,13 @@
 <script lang="ts">
 	import Theme from '$lib/components/Theme.svelte';
 	import { appConfig } from '$lib/collections/config';
+
+	import { onMount } from 'svelte';
+	import { themeChange } from 'theme-change';
+
+	onMount(() => {
+		themeChange(false);
+	});
 </script>
 
 <div>
