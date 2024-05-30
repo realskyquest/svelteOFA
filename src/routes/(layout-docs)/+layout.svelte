@@ -20,7 +20,7 @@
 			</div>
 			<div class="navbar-end flex flex-row">
 				<label for="drawer-main" class="btn btn-primary drawer-button lg:hidden">Menu</label>
-                <Theme />
+				<Theme />
 			</div>
 		</div>
 
@@ -36,9 +36,8 @@
 		<label for="drawer-main" aria-label="close sidebar" class="drawer-overlay"></label>
 		<ul class="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
 			<!-- Sidebar content here -->
-            <li><a href="/docs">Docs</a></li>
-			<li><a>Sidebar Item 1</a></li>
-			<li><a>Sidebar Item 2</a></li>
+			<li><a href="/docs" class="active">Docs</a></li>
+			<li><a>Coming Soon!</a></li>
 		</ul>
 	</div>
 </div>
