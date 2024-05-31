@@ -2,6 +2,8 @@
 	import { appConfig } from '$lib/collections/config';
 	const pageName = 'What is svelte OFA';
 	const pageUrl = 'what-is-svelte-ofa';
+
+	import Image from '$lib/assets/images/pwa-512x512.png?enhanced';
 </script>
 
 <svelte:head>
@@ -37,6 +39,8 @@
 <div class="h-[calc(100vh-7rem)] min-h-[28rem]">
 	<div class="flex flex-col items-center justify-center">
 		<div class="m-8">
+			<enhanced:img src={Image} alt="some alt text" />
+
 			<h1 class="text-4xl font-extrabold">
 				<span
 					class="bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent"
@@ -46,7 +50,7 @@
 			</h1>
 			<p class="mt-4">
 				Svelte OFA ( <i>One For All</i> ) is a simple and easy to configure sveltekit app,<br />
-				specially made to be used with cloudflare pages in ssg, but can be easily modifed to work with<br
+				specially made to be used with cloudflare pages in ssg, but can be easily modified to work with<br
 				/>
 				other platforms and rendering methods.
 			</p>
