@@ -3,7 +3,7 @@
 	const pageName = 'What is svelte OFA';
 	const pageUrl = 'what-is-svelte-ofa';
 
-	import Image from '$lib/assets/images/pwa-512x512.png?enhanced';
+	import Image from '$lib/assets/images/pwa-banner.png?enhanced';
 </script>
 
 <svelte:head>
@@ -36,11 +36,16 @@
 	<meta property="twitter:image" content="{appConfig.url}/pwa-512x512.png" />
 </svelte:head>
 
+<enhanced:img
+	src={Image}
+	alt="svelte favicon"
+	class="mx-auto mb-4 mt-8"
+	sizes="(min-width:1536px) 512px, (min-width:1024px) 256px, (min-width:640px) 128px"
+/>
+
 <div class="h-[calc(100vh-7rem)] min-h-[28rem]">
 	<div class="flex flex-col items-center justify-center">
 		<div class="m-8">
-			<enhanced:img src={Image} alt="some alt text" />
-
 			<h1 class="text-4xl font-extrabold">
 				<span
 					class="bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent"

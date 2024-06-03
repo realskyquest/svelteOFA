@@ -1,1 +1,1 @@
-declare module "$lib/assets/images/*?enhanced"
+declare module '$lib/assets/images/*?enhanced';
